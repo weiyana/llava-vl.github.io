@@ -3,10 +3,10 @@
 
 <head>
   <meta charset="utf-8">
-  <meta name="description" content="Visual Instruction Tuning">
-  <meta name="keywords" content="multimodal chatbot">
+  <meta name="description" content="Grounded Image Text Matching with Mismatched Relation Reasoning">
+  <meta name="keywords" content="vision-language">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>LLaVA</title>
+  <title>GITM-MR</title>
 
   <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
@@ -114,31 +114,34 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">Visual Instruction Tuning</h1>
-            <h3 class="title is-3 publication-title">LLaVA: Large Language and Vision Assistant</h3>
+            <h1 class="title is-1 publication-title">GITM-MR</h1>
+            <h3 class="title is-3 publication-title">Grounded Image Text Matching with Mismatched Relation Reasoning</h3>
             <div class="is-size-5">
               <span class="author-block">
-                <a href="https://hliu.cc/" style="color:#f68946;font-weight:normal;">Haotian Liu<sup>*</sup></a>,
+                <a href="#" style="color:#f68946;font-weight:normal;">Wu Yu<sup>*</sup></a>,
               </span>
               <span class="author-block">
-                <a href="https://chunyuan.li/" style="color:#008AD7;font-weight:normal;">Chunyuan Li<sup>*</sup></a>,
+                <a href="#" style="color:#f68946;font-weight:normal;">Yana Wei<sup>*</sup></a>,
               </span>
               <span class="author-block">
-                <a href="https://qywu.github.io/about.html" style="color:#F2A900;font-weight:normal;">Qingyang Wu</a>,
+                <a href="#" style="color:#008AD7;font-weight:normal;">Haozhe Wang</a>,
               </span>
               <span class="author-block">
-                <a href="https://pages.cs.wisc.edu/~yongjaelee/" style="color:#f68946;font-weight:normal;">Yong Jae
-                  Lee</a>,
+                <a href="#" style="color:#F2A900;font-weight:normal;">Yongfei Liu</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" style="color:#f68946;font-weight:normal;">Sibei Yang</a>,
+              </span>
+              <span class="author-block">
+                <a href="#" style="color:#f68946;font-weight:normal;">Xuming He</a>,
               </span>
             </div>
 
             <br>
             <div class="is-size-5 publication-authors">
-              <span class="author-block"><b style="color:#f68946; font-weight:normal">&#x25B6 </b> University of
-                Wisconsin-Madison</b></span>
-              <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Microsoft Research</span>
-              <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b>Columbia
-                University</span>
+              <span class="author-block"><b style="color:#f68946; font-weight:normal">&#x25B6 </b> ShanghaiTech University</b></span>
+              <span class="author-block"><b style="color:#008AD7; font-weight:normal">&#x25B6 </b> Alibaba Group</span>
+              <span class="author-block"><b style="color:#F2A900; font-weight:normal">&#x25B6 </b> ByteDance Inc.3</span>
               <span class="author-block">&nbsp&nbsp<sup>*</sup>Equal Contribution</span>
             </div>
 
@@ -146,7 +149,7 @@
             <div class="column has-text-centered">
               <div class="publication-links">
                 <span class="link-block">
-                  <a href="https://arxiv.org/abs/2304.08485" target="_blank"
+                  <a href="https://arxiv.org/abs/2308.01236.pdf" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="ai ai-arxiv"></i>
@@ -155,7 +158,7 @@
                   </a>
                 </span>
                 <span class="link-block">
-                  <a href="https://github.com/haotian-liu/LLaVA" target="_blank"
+                  <a href="#" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
@@ -163,7 +166,7 @@
                     <span>Code</span>
                   </a>
                 </span>
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href="https://llava.hliu.cc" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -171,9 +174,9 @@
                     </span>
                     <span>Demo</span>
                   </a>
-                </span>
+                </span> -->
                 <span class="link-block">
-                  <a href="https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K" target="_blank"
+                  <a href="#" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fas fa-database"></i>
@@ -181,7 +184,7 @@
                     <span>Dataset</span>
                   </a>
                 </span>
-                <span class="link-block">
+                <!-- <span class="link-block">
                   <a href="https://huggingface.co/liuhaotian/LLaVA-13b-delta-v0" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
@@ -189,7 +192,7 @@
                     </span>
                     <span>Model</span>
                   </a>
-                </span>
+                </span> -->
 
 
                 
@@ -215,19 +218,17 @@
     <div class="container is-max-desktop">
       <div class="hero-body">
         <h4 class="subtitle has-text-centered">
-          LLaVA represents a novel end-to-end trained large multimodal model that combines a vision encoder and Vicuna
-          for general-purpose visual and language understanding,
-          achieving impressive chat capabilities mimicking spirits of the multimodal GPT-4 and setting a new state-of-the-art accuracy on Science QA.
+          Grounded Image Text Matching with Mismatched Relation (GITM-MR) is a novel visual-linguistic joint task that evaluates the relation understanding capabilities of transformer-based pre-trained models. GITM-MR requires a model to first determine if an expression describes an image, then localize referred objects or ground the mismatched parts of the text. We provide a benchmark for evaluating pre-trained models on this task, with a focus on the challenging settings of limited data and out-of-distribution sentence lengths.
         </h4>
       </div>
     </div>
   </section>
 
-  <section class="section"  style="background-color:#efeff081">
+  <!-- <section class="section"  style="background-color:#efeff081">
     <div class="container is-max-desktop" id="gradio">
       <gradio-app src="https://llava.hliu.cc"></gradio-app>
     </div>
-  </section>
+  </section> -->
 
   <section class="section"  style="background-color:#efeff081">
     <div class="container is-max-desktop">
@@ -237,9 +238,10 @@
           <h2 class="title is-3">Abstract</h2>
           <div class="content has-text-justified">
             <p>
-              Instruction tuning large language models (LLMs) using machine-generated instruction-following data has improved zero-shot capabilities on new tasks in the language domain, but the idea is less explored in the multimodal field.
+              This paper introduces Grounded Image Text Matching with Mismatched Relation (GITM-MR), a novel visual-linguistic joint task that evaluates the relation understanding capabilities of transformer-based pre-trained models.
+
               <ol type="1">
-                <li><b>Multimodal Instruct Data</b>. <span style="font-size: 95%;">We present the first attempt to use <a href="https://openai.com/research/gpt-4">language-only GPT-4</a> to generate multimodal language-image instruction-following data. </span></li>
+                <li><b>New VL task</b>. <span style="font-size: 95%;">We propose a new VL task GITM-MR that challenges relation correspondence learning in VL pre-trained model, and focusing on both data efficiency and out-of-distribution text length setting, with a new benchmark for GITM-MR. </span></li>
                 <li><b>LLaVA Model</b>. <span style="font-size: 95%;">We introduce <it><b>LLaVA</b> (<b>L</b>arge <b>L</b>anguage-<b>a</b>nd-<b>V</b>ision <b>A</b>ssistant)</it>, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general-purpose visual and language understanding.</li>
                 <li><b>Performance</b>. <span style="font-size: 95%;">Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset.
                   When fine-tuned on <a href="https://scienceqa.github.io/">Science QA</a>, the synergy of LLaVA and GPT-4  achieves a new state-of-the-art accuracy of 92.53%.</li>
@@ -565,11 +567,13 @@
     <div class="container is-max-desktop content">
       <h2 class="title">BibTeX</h2>
       <pre><code>
-  @article{liu2023llava,
-    author      = {Liu, Haotian and Li, Chunyuan and Wu, Qingyang and Lee, Yong Jae},
-    title       = {Visual Instruction Tuning},
-    publisher   = {arXiv:2304.08485},
-    year        = {2023}
+  @misc{wu2023grounded,
+          title={Grounded Image Text Matching with Mismatched Relation Reasoning}, 
+          author={Yu Wu and Yana Wei and Haozhe Wang and Yongfei Liu and Sibei Yang and Xuming He},
+          year={2023},
+          eprint={2308.01236},
+          archivePrefix={arXiv},
+          primaryClass={cs.CV}
   }
   </code></pre>
     </div>
