@@ -114,7 +114,7 @@
       <div class="container is-max-desktop">
         <div class="columns is-centered">
           <div class="column has-text-centered">
-            <h1 class="title is-1 publication-title">GITM-MR</h1>
+            <h1 class="title is-1 publication-title">GITM-MR Benchmark</h1>
             <h3 class="title is-3 publication-title">Grounded Image Text Matching with Mismatched Relation Reasoning</h3>
             <div class="is-size-5">
               <span class="author-block">
@@ -181,7 +181,7 @@
                     <span class="icon">
                       <i class="fas fa-database"></i>
                     </span>
-                    <span>Dataset</span>
+                    <span>Dataset Download</span>
                   </a>
                 </span>
                 <!-- <span class="link-block">
@@ -235,18 +235,10 @@
       <!-- Abstract. -->
       <div class="columns is-centered has-text-centered">
         <div class="column is-six-fifths">
-          <h2 class="title is-3">Abstract</h2>
+          <h2 class="title is-3">Introduction to Our Benchmark</h2>
           <div class="content has-text-justified">
             <p>
-              This paper introduces Grounded Image Text Matching with Mismatched Relation (GITM-MR), a novel visual-linguistic joint task that evaluates the relation understanding capabilities of transformer-based pre-trained models.
-
-              <ol type="1">
-                <li><b>New VL task</b>. <span style="font-size: 95%;">We propose a new VL task GITM-MR that challenges relation correspondence learning in VL pre-trained model, and focusing on both data efficiency and out-of-distribution text length setting, with a new benchmark for GITM-MR. </span></li>
-                <li><b>LLaVA Model</b>. <span style="font-size: 95%;">We introduce <it><b>LLaVA</b> (<b>L</b>arge <b>L</b>anguage-<b>a</b>nd-<b>V</b>ision <b>A</b>ssistant)</it>, an end-to-end trained large multimodal model that connects a vision encoder and LLM for general-purpose visual and language understanding.</li>
-                <li><b>Performance</b>. <span style="font-size: 95%;">Our early experiments show that LLaVA demonstrates impressive multimodel chat abilities, sometimes exhibiting the behaviors of multimodal GPT-4 on unseen images/instructions, and yields a 85.1% relative score compared with GPT-4 on a synthetic multimodal instruction-following dataset.
-                  When fine-tuned on <a href="https://scienceqa.github.io/">Science QA</a>, the synergy of LLaVA and GPT-4  achieves a new state-of-the-art accuracy of 92.53%.</li>
-                <li><b>Open-source</b>. <span style="font-size: 95%;">We make GPT-4 generated visual instruction tuning data, our model and code base publicly available.</li>
-              </ol>  
+              To conduct systematical study, we construct a benchmark for the GITM-MR task, including a new dataset and two challenging evaluation settings. We first build a dataset of image-text pairs from the public REC dataset, <a href="https://sibeiyang.github.io/dataset/ref-reasoning/">Ref-Reasoning</a>, by substituting the relation phrases to generate mismatched referring expressions for images from the <a href="https://homes.cs.washington.edu/~ranjay/visualgenome/index.html">Visual Genome Dataset</a>. From the provided relation phrases in the LSG offered by the dataset, we manually select a subset of 27 commonly-occurred relations, and assign some contextual close but semantically different ones for each relation in the subset as their mismatched candidates. We control the linguistic bias by several measures, including keeping the relation distribution and checking by language-only model.
            </p>
   
           </div>
@@ -262,7 +254,7 @@
   <!-- Results. -->
   <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/5886/5886212.png"> Multimodal Instrucion-Following Data</h2>
+      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/5886/5886212.png"> Expressions Generation</h2>
     </div>
   </div>
   <!-- </div> -->
@@ -273,11 +265,10 @@
     <div class="column is-full-width">
       <div class="content has-text-justified">
         <p>
-          Based on the COCO dataset, we interact with langauge-only GPT-4, and collect 158K unique language-image instruction-following samples in total, including 58K in conversations, 23K in detailed description, and 77k in complex reasoning, respectively. Please check out ``LLaVA-Instruct-150K''' on 
-          <a href="https://huggingface.co/datasets/liuhaotian/LLaVA-Instruct-150K">[HuggingFace Dataset]</a>.
+          We construct our dataset GITM-MR by a generation program to create mismatch expressions from the corresponding original expressions by partial replacement. First, we identify all the relation phrases in the expressions of the Ref-Reasoning dataset by using an <a href="https://aclanthology.org/W15-2812/">off-the-shelf parser</a>. After that, we manually select a subset of 27 commonly-occurred relations, and assign some relations acceptable to similar contexts but with different semantics, for each relation in the subset, as their replacement candidates. For example, we assign "carry" as an candidate for "wear", and "to the left of" as an candidate for "to the right of". Utilizing human annotations as such significantly reduces the linguistic bias and false negative cases on the generated expressions. Finally, we replace one relation in each expression by a candidate to construct a mismatch expression. The program keeps the relation phrase set and the replaced relation for each expression as the labels for MRR evaluation.
 
 <!-- CSS Code: Place this code in the document's head (between the 'head' tags) -->
-<style>
+<!-- <style>
   table.GeneratedTable {
     width: 100%;
     background-color: #ffffff;
@@ -298,10 +289,10 @@
   table.GeneratedTable thead {
     background-color: #6691ee;
   }
-  </style>
+  </style> -->
   
   <!-- HTML Code: Place this code in the document's body (between the 'body' tags) where the table should appear -->
-  <div class="column is-six-fifths" width="80%">
+  <!-- <div class="column is-six-fifths" width="80%">
   <table class="GeneratedTable">
     <thead>
       <tr>
@@ -328,15 +319,24 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->
   <!-- Codes by Quackit.com -->
   
         </p>
         <p>
-          For each subset, we visualize the root noun-verb pairs for the instruction and response. For each chart, please click the link for the interactive page to check out the noun-verb pairs whose frequency is higher the given number.        
+          <b>Mismatched relation diversity.</b> In the real-world scenario, the mismatched expressions should be various as the matched expressions, rather than showing certain patterns which are easy to identify. To keep the diversity, we assign multiple substitutions for each relation. The full replacement candidate list is shown in the following table for the reference. We randomly select the substitution when replacing a relation.   
         </p>
       </div>
-
+      <div class="columns is-centered has-text-centered">
+        <div class="column is-six-fifths" style="display: flex; align-items: flex-start; justify-content: center;">  
+          <figure style="text-align: center;">
+            <img id="teaser" width="50%" src="images/phrase-table.png">
+          </figure>
+        </div>
+      </div>
+      <p>
+        <b>Linguistic bias.</b> The generated mismatched expression should have close perplexity in the pre-trained language model <a href="#">BERT</a> with the original matched expression. After the substitution, the relation phrase occurrence distribution in matched and mismatched expressions should be close. We count the distribution of sentence perplexity in the range of 0 to 105 in the left figure, and the frequencies from the main body of the relation phrases belonging to the substitution list in the right figure. The statistics of matched and mismatched expressions in the validation set are shown by the bars with different colors. The results demonstrate the high similarity between matched and mismatched expressions.
+      </p>
   
 
 
@@ -345,29 +345,32 @@
       <div class="columns is-centered has-text-centered">
       <div class="column is-six-fifths" style="display: flex; align-items: flex-start; justify-content: center;">  
         <figure style="text-align: center;">
-          <img id="teaser" width="100%" src="images/LLaVA-Instruct-150K_noun_verb/conversation_58k_instruction_verb_noun_50.png">  
+          <img id="teaser" width="100%" src="images/perplexity_val.png">  
           <figcaption>
-            Instruction: Conversation [<a href="images/LLaVA-Instruct-150K_noun_verb/conversation_58k_instruction_verb_noun_0.html">0</a>, <a href="images/LLaVA-Instruct-150K_noun_verb/conversation_58k_instruction_verb_noun_20.html">20</a>, <a href="images/LLaVA-Instruct-150K_noun_verb/conversation_58k_instruction_verb_noun_50.html">50</a>]
+            Sentence perplexity distributions on the validation set. Only the perplexities ranging from 0 to 105 are shown for the ease of reading.
           </figcaption>
         </figure>
         <figure style="text-align: center;">
-          <img id="teaser" width="100%" src="images/LLaVA-Instruct-150K_noun_verb/detail_23k_instruction_verb_noun_0.png">  
+          <img id="teaser" width="100%" src="images/freq_in_val.png">  
           <figcaption>
-            Instruction: Detailed Description  [<a href="images/LLaVA-Instruct-150K_noun_verb/detail_23k_instruction_verb_noun_0.html">0</a>]
+            Relation frequencies on the validation set. Only the body part of the relations are shown for the ease of reading.
           </figcaption>
         </figure>
-        <figure style="text-align: center;">
+        <!-- <figure style="text-align: center;">
           <img id="teaser" width="100%" src="images/LLaVA-Instruct-150K_noun_verb/complex_reasoning_77k_instruction_verb_noun_50.png">  
           <figcaption>
             Instruction: Complex Reasoning   [<a href="images/LLaVA-Instruct-150K_noun_verb/complex_reasoning_77k_instruction_verb_noun_0.html">0</a>, <a href="images/LLaVA-Instruct-150K_noun_verb/complex_reasoning_77k_instruction_verb_noun_20.html">20</a>, <a href="images/LLaVA-Instruct-150K_noun_verb/complex_reasoning_77k_instruction_verb_noun_50.html">50</a>]
           </figcaption>
-        </figure>
+        </figure> -->
       </div>
       </div>  
+      <p>
+        <b>False mismatch.</b> There still exist image-text pairs where a relational phrase in an expression is replaced, but the entire expression still perfectly describes an object in the image. We call these false mismatched cases. To avoid those unwanted cases from hurting the quality of testing, we hired annotators from <a href="#">Stardust</a> to label the mismatch cases in the test set, indicating whether the constructed mismatched sentence description in each case can match an object in the image. In the end, we only keep the cases that the annotators identified as mismatch in the test set. The final test set contains only the reserved mismatch cases and their corresponding matched cases. 
+      </p>
 
 
 
-      <div class="columns is-centered has-text-centered">
+      <!-- <div class="columns is-centered has-text-centered">
         <div class="column is-six-fifths" style="display: flex; align-items: flex-start; justify-content: center;">  
           <figure style="text-align: center;">
             <img id="teaser" width="100%" src="images/LLaVA-Instruct-150K_noun_verb/conversation_58k_response_verb_noun_50.png">  
@@ -388,7 +391,7 @@
             </figcaption>
           </figure>
         </div>
-        </div>      
+        </div>       -->
 
     </div>
   </div>
@@ -401,7 +404,7 @@
   <!-- Results. -->
   <div class="columns is-centered has-text-centered">
     <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> LLaVA: Large Language-and-Vision Assistant</h2>
+      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/5379/5379860.png"> Cases</h2>
     </div>
   </div>
   <!-- </div> -->
@@ -412,22 +415,13 @@
     <div class="column is-full-width">
       <div class="content has-text-justified"> 
         <p>
-          LLaVa connects pre-trained <a href="https://openai.com/research/clip">CLIP ViT-L/14</a> visual encoder and large language model <a href="https://github.com/lm-sys/FastChat">Vicuna</a>, using a simple projection matrix.   We consider a two-stage instruction-tuning procedure:
-          <ul type="1">
-            <li><b>Stage 1: Pre-training for Feature Alignment</b>. <span style="font-size: 95%;">Only the projection matrix is updated, based on a subset of CC3M.</span></li>
-            <li><b>Stage 2: Fine-tuning End-to-End.</b>. <span style="font-size: 95%;">Both the projection matrix and LLM are updated for two different use senarios: 
-              <ul type="1">
-                <li> <b>Visual Chat</b>: LLaVA is fine-tuned on our generated multimodal instruction-following data for daily user-oriented applications. 
-                <li> <b>Science QA</b>: LLaVA is fine-tuned on this multimodal reasonsing dataset for the science domain.</span></li>
-              </ul>  
-          </ul>  
-          Please check out ``LLaVA-13b-delta-v0'' model checkpoint on 
-          <a href="https://huggingface.co/liuhaotian/LLaVA-13b-delta-v0">[HuggingFace Models]</a>.
+          The following images show the generated cases in our dataset with the inference process conducted by our model RCRN.
+          
         </p>
       </div>
       <centering>
         <div style="text-align: center;">
-          <img id="teaser" width="70%" src="images/llava_arch.png">     
+          <img id="teaser" width="70%" src="images/case.png">     
         </div>
 
       
@@ -440,128 +434,7 @@
   
 
 
-<section class="section">
-  <!-- Results. -->
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"><img id="painting_icon" width="3%" src="https://cdn-icons-png.flaticon.com/512/3515/3515174.png"> Performance</h2>
-    </div>
-  </div>
 
-
-
-  <!-- </div> -->
-  <!--/ Results. -->    
-<div class="container is-max-desktop">
-
-
-  <!-- Grounedtext2img. -->
-  <div class="columns is-centered">
-    <div class="column is-full-width">
-      <h2 class="title is-4"><img id="painting_icon" width="4%" src="https://cdn-icons-png.flaticon.com/512/1698/1698535.png"> <span style="font-size: 100%;">Visual Chat:</span> Towards building multimodal GPT-4 level chatbot  </h2>
-      
-      <div>
-        <a href="https://plotly.com/~lichunyuan24/5/?share_key=d78QObaCAYCIy8PJpe3gd1" target="_blank" title="llava_gpt4_pie" style="display: block; text-align: center;">  <img id="painting_icon" width="90%" src="images/pie_llava_gpt4.png"> </a>
-
-    </div>
-
-    <p style="font-family:Times New Roman"><b>An evaluation dataset with 30 unseen images is constructed: each image is assocaited with three types of instructions: conversation, detailed description and complex reasoning. This leads to 90 new language-image instructions, on which we test LLaVA and GPT-4, and use GPT-4 to rate their responses from score 1 to 10. The summed score and relative score per type is reported. Overall, LLaVA achieves 85.1% relative score compared with GPT-4, indicating the effectinvess of the proposed self-instruct method in multimodal settings</b>               
-    </div>
-  </div>
-
-  <!-- Grounedtext2img. -->
-  <div class="columns is-centered">
-    <div class="column is-full-width">
-      <h2 class="title is-4"> <img id="painting_icon" width="3%" src="https://scienceqa.github.io/img/logo.png"><span style="font-size: 100%;"> Science QA:</span> New SoTA with the synergy of LLaVA with GPT-4</h2>
-      
-      <div>
-        <a href="https://plotly.com/~lichunyuan24/1/?share_key=v4opE3TJpxqQ08RYsDD4iv" target="_blank" title="Plot 1" style="display: block; text-align: center;"><img id="painting_icon" width="65%" src="images/bar_llava_gpt4_scienceqa.png"></a>
-        <script data-plotly="lichunyuan24:1" sharekey-plotly="v4opE3TJpxqQ08RYsDD4iv" src="https://plotly.com/embed.js" async></script>
-    </div>
-        <p style="font-family:Times New Roman"><b>LLaVA alones achieve 90.92%. We use the text-only GPT-4 as the juedge, to predict the final answer based on its own previous answers and the LLaVA answers. This ``GPT-4 as juedge'' scheme yields a new SOTA 92.53%.</b>
-              
-    </div>
-  </div>
-</section>
-
-
-
-
-<section class="section">
-
-  <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <h2 class="title is-3"> Examples on Visual Instruction Following</h2>
-    </div>
-  </div>
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-         <h2 class="title is-4">Visual Reasoning on two examples from <a href="https://arxiv.org/abs/2303.08774">OpenAI GPT-4 Technical Report</a></h2>
-      </div>
-      </div>  
-
-    <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths">
-      <img id="teaser" width="35%" src="images/cmp_ironing.png">
-      <img id="teaser" width="38%" src="images/cmp_chicken_nugget.png">
-    </div>
-    </div>  
-
-  
-
-    <div class="columns is-centered has-text-centered">
-      <div class="column is-six-fifths">
-         <h2 class="title is-4">Optical character recognition (OCR)</a></h2>
-      </div>
-      </div>  
-
-    <div class="columns is-centered has-text-centered">
-    <div class="column is-six-fifths" style="display: flex; align-items: flex-start; justify-content: center;">
-        <img id="teaser" width="32%" src="images/ocr/llava_example_cvpr2023.png">
-        <img id="teaser" width="32%" src="images/ocr/llava_example_cvinw_logo.png">
-        <img id="teaser" width="32%" src="images/ocr/example_llava_exmaple.png">
-    </div>
-    </div>  
-
-  
-
-  
-
-
-  <div class="container mt-5">
-    <!-- <h2 class="text-center mb-5">Who's GPT-4's favorite? Battles between State-of-the-Art Chatbots</h2> -->
-    <!-- Selection -->
-    <div class="form-row" style="justify-content: flex-end;">
-      <div class="form-group col-md-1">
-        <div class="col-md-2" style="width: 100%"><label>&nbsp;</label></div>
-        <div class="btn-group" role="group" aria-label="Left and Right Controller"
-          style="width: 100%;align-items: flex-end;justify-content: center;flex-direction: row;display: flex;">
-          <button type="button" class="form-control btn btn-primary" id="prev-question"><i
-              class="material-icons">keyboard_arrow_left</i></button>
-          <button type="button" class="form-control btn btn-primary" id="next-question"><i
-              class="material-icons">keyboard_arrow_right</i></button>
-
-        </div>
-      </div>
-    </div>
-
-    <!-- Question Card -->
-    <div style="display: flex; justify-content: center; align-items: center;">
-      <div class="card mb-4" style="width: 100%; display: flex; align-items: center;">
-        <!-- <p><b>Description:</b> Monalisa is a famous painting by Leonardo da Vinci. </p> -->
-
-        <div class="card-body" id="selected-question" style="display: flex; height: 80vh;">
-          <div class="chat-history">
-            <!-- Add your chat messages here -->
-          </div>
-
-        </div>
-      </div>
-    </div>
-
-  </div>
-</section>
 
   <section class="section" id="BibTeX">
     <div class="container is-max-desktop content">
@@ -579,7 +452,7 @@
     </div>
   </section>
   
-  <section class="section" id="Acknowledgement">
+  <!-- <section class="section" id="Acknowledgement">
     <div class="container is-max-desktop content">
       <h2 class="title">Acknowledgement</h2>
       <p>
@@ -601,7 +474,7 @@
       <a href='https://instruction-tuning-with-gpt-4.github.io/'>[Insutrction Tuning with GPT-4]</a>      
       </p>    
     </div>
-  </section>
+  </section> -->
 
   <script>
     // Handle message showing
